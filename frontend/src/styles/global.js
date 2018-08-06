@@ -11,4 +11,12 @@ injectGlobal`
   button, a {
     cursor: pointer;
   }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  input {
+    outline: none;
+  }
 `;

@@ -2,53 +2,77 @@ import styled from "styled-components";
 
 export const Container = styled.aside`
   height: 100vh;
-  width: 150px;
+  width: 100px;
   background-color: #751943;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
 
-  > div {
+  div {
+    height: 100%;
     padding: 25px;
-  }
-
-  img {
-    width: 150px;
-    height: 100px;
-    background: #751943;
-  }
-`;
-
-export const Nav = styled.ul`
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-  padding: 0;
-  margin: 0;
-
-  li {
-    list-style: none;
-
-    a {
-      color: #fff;
-      margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    
+    ul {
+      list-style: none;
+      
+      li {
+        padding: 10px 100px;
+        margin-top: 15px;
+        cursor: pointer;
+        a {
+          background: transparent;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-decoration: none;
+          i {
+            font-size: 1.3em;
+            color: #fff;
+          }
+          span {
+            color: #fff;
+            font-size: 0.8em;
+            margin-top: 10px;
+          }
+        }
+        
+        &:hover {
+          background: #470e28;
+        }
+      }
+      
+      li:first-child {
+        background: #470e28;
+        margin-top: 0;
+      }
+    }
+    
+    div {
+      text-decoration: none;
+      span {
+        color: #fff;
+        text-decoration: none;
+        margin-top: 10px;
+        font-size: 0.8em;
+      }
+    }
+    
+    a:last-of-type {
+      i {
+        font-size: 1.5em;
+        color: #fff;
+      }
     }
   }
 
-  li:first-child {
-    background: #4c112c;
+  img {
+    width: 100px;
+    height: 70px;
+    background: #751943;
+    margin-top: 25px;
   }
-`;
-
-export const Exit = styled.div`
-  background: #4c112c;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 25px;
-  color: #fff;
 `;
