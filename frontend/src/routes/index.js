@@ -1,9 +1,7 @@
-import React from 'react';
-
-import { Switch, Route } from 'react-router-dom';
-
-import Courses from '../pages/Courses';
-import Users from '../pages/Users';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Courses from "../pages/Courses";
+import Users from "../pages/Users";
 
 const Routes = () => (
   <Switch>
