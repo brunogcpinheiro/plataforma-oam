@@ -20,7 +20,7 @@ export const Container = styled.aside`
       list-style: none;
       
       li {
-        padding: 10px 100px;
+        padding: 10px 27px;
         margin-top: 15px;
         cursor: pointer;
         a {

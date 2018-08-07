@@ -3,12 +3,13 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 25px;
 
   h2 {
     padding: 25px 0 0 25px;
     font-size: 1.8em;
   }
-
+  
   div {
     display: flex;
   }
