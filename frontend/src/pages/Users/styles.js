@@ -12,19 +12,21 @@ export const Container = styled.div`
 
   div {
     display: flex;
+    width: 500px;
   }
 `;
 
 export const Form = styled.form`
-  width: 65%;
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   input {
     padding: 10px;
     margin: 20px 0 0 25px;
     border-radius: 10px;
     border: none;
+    border: 1px solid #e5e5e5;
   }
 
   input:last-child {
