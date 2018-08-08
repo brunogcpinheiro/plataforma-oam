@@ -1,24 +1,58 @@
-import React from 'react';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Logo from "../../assets/images/logo.png";
+import { Container, LoginForm, Form } from "./styles";
+import api from "../../services/api";
 
-import { Link } from 'react-router-dom';
+class Login extends Component {
+  state = {
+    email: "",
+    password: ""
+  };
 
-import Logo from '../../assets/images/logo.png';
+  handleContent = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
 
-import { Container, LoginForm, Form } from './styles';
+  handleSave = async e => {
+    e.preventDefault();
 
-const Login = () => (
-    <Container>
+    const { data: user } = await api.post("/login", {
+      email: this.state.email,
+      password: this.state.password
+    });
+
+    console.log(user);
+  };
+
+  render() {
+    return (
+      <Container>
         <LoginForm>
-            <Form>
-                <img src={Logo} alt="Logo" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Senha" />
-                <Link to="/courses">
-                    <input type="submit" value="Entrar" />
-                </Link>
-            </Form>
+          <Form onSubmit={this.login}>
+            <img src={Logo} alt="Logo" />
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              onChange={this.handleContent}
+            />
+            <input
+              type="password"
+              placeholder="Senha"
+              name="password"
+              onChange={this.handleContent}
+            />
+            {/* <Link to=""> */}
+            <input type="submit" value="Entrar" />
+            {/* </Link> */}
+          </Form>
         </LoginForm>
-    </Container>
-);
+      </Container>
+    );
+  }
+}
 
 export default Login;
