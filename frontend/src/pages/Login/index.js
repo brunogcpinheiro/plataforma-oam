@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
-import { Container, LoginForm, Form } from "./styles";
+import { Container, LoginForm, Form, ErrorMessage } from "./styles";
 import api from "../../services/api";
 
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    error: ""
   };
 
   handleContent = e => {
@@ -18,20 +19,33 @@ class Login extends Component {
 
   handleSave = async e => {
     e.preventDefault();
-
-    const { data: user } = await api.post("/login", {
-      email: this.state.email,
-      password: this.state.password
-    });
-
-    console.log(user);
+    
+    if (this.state.email.length === 0 || this.state.password.length === 0) {
+      this.setState({ error: 'Preencha usuário e senha para continuar!' }, () => false);
+    } else {
+      try {
+    
+        const { data: user } = await api.post("/login", {
+          email: this.state.email,
+          password: this.state.password,
+        }, {
+          'Authorization': 'Bearer ' + user.token,
+          'Content-Type': 'application/json',
+        });
+        
+        console.log(user);
+        
+      } catch(error) {
+        this.setState({ error: error });
+      }
+    }
   };
 
   render() {
     return (
       <Container>
         <LoginForm>
-          <Form onSubmit={this.login}>
+          <Form onSubmit={this.handleSave}>
             <img src={Logo} alt="Logo" />
             <input
               type="email"
@@ -45,11 +59,10 @@ class Login extends Component {
               name="password"
               onChange={this.handleContent}
             />
-            {/* <Link to=""> */}
             <input type="submit" value="Entrar" />
-            {/* </Link> */}
           </Form>
         </LoginForm>
+        {this.state.error.length !== 0 && <ErrorMessage>{this.state.error}</ErrorMessage>}
       </Container>
     );
   }

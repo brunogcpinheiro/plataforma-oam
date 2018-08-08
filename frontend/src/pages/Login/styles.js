@@ -45,3 +45,10 @@ export const Form = styled.form`
         cursor: pointer;
     }
 `;
+
+export const ErrorMessage = styled.p`
+  text-align: center;
+  color: #ce2029;
+  font-size: 16px;
+  margin-top: 15px;
+`;
