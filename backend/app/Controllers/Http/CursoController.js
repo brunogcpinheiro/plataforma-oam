@@ -50,10 +50,13 @@ class CursoController {
    * Delete a curso with id.
    * DELETE cursos/:id
    */
-  async destroy({ params }) {
+  async destroy({ params, auth }) {
     const curso = await Curso.find(params.id);
+    if (curso.user_id !== auth.user.id) {
+      return "Não autorizado";
+    }
+    
     await curso.delete();
-    return "Curso deletado";
   }
 }
 

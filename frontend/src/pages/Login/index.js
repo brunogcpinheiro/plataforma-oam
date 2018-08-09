@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
 import { Container, LoginForm, Form, ErrorMessage } from "./styles";
 import api from "../../services/api";
+import { reactLocalStorage } from 'reactjs-localstorage';
 
 class Login extends Component {
   state = {
     email: "",
     password: "",
-    error: ""
+    error: "",
+    isLoggedIn: false,
   };
 
   handleContent = e => {
@@ -25,18 +27,17 @@ class Login extends Component {
     } else {
       try {
     
-        const { data: user } = await api.post("/login", {
-          email: this.state.email,
-          password: this.state.password,
-        }, {
-          'Authorization': 'Bearer ' + user.token,
-          'Content-Type': 'application/json',
-        });
+      const { data: user } = await api.post('/login', {
+        email: this.state.email,
+        password: this.state.password
+      });
+      
+      reactLocalStorage.set('token', user.token);
+      
+      return this.setState({ isLoggedIn: true });
         
-        console.log(user);
-        
-      } catch(error) {
-        this.setState({ error: error });
+      } catch (error) {
+        this.setState({ error: "Algo deu errado na requisição!" });
       }
     }
   };
@@ -59,6 +60,7 @@ class Login extends Component {
               name="password"
               onChange={this.handleContent}
             />
+            { this.state.isLoggedIn && <Redirect to="/courses" /> }
             <input type="submit" value="Entrar" />
           </Form>
         </LoginForm>
@@ -68,4 +70,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

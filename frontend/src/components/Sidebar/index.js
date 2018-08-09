@@ -22,7 +22,7 @@ const Sidebar = () => (
           </Link>
         </li>
       </ul>
-      <Link to="">
+      <Link to="/">
         <div>
           <i className="fas fa-door-open" />
           <span>Sair</span>
